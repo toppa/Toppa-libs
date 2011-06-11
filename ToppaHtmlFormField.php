@@ -17,7 +17,7 @@ class ToppaHtmlFormField {
             'rows' => null) // for textarea
     );
 
-    public function __construct($name, $refData) {
+    public function __construct($name, array $refData) {
         $this->id = str_replace("[", "_", $name);
         $this->id = str_replace("]", "", $this->id);
         $this->name = $name;
@@ -60,7 +60,7 @@ class ToppaHtmlFormField {
         return false;
     }
 
-    public static function quickBuild($name, $refData, $value = null, $cssClass = null) {
+    public static function quickBuild($name, array $refData, $value = null, $cssClass = null) {
         $field = new ToppaHtmlFormField($name, $refData, $value, $cssClass);
 
         if ($value) {

@@ -1,8 +1,10 @@
 <?php
 
-require_once(dirname(__FILE__) . '/../ToppaWpDatabaseFacade.php');
+require_once(dirname(__FILE__) . '/../ToppaAutoLoaderWp.php');
 
-class UnitToppaWpDatabaseFacade extends UnitTestCase {
+// many methods in this class call WP functions directly,
+// therefore only those tests without direct WP dependencies have unit tests
+class UnitToppaDatabaseFacadeWp extends UnitTestCase {
     private $dbFacade;
 
     public function __construct() {
@@ -10,7 +12,8 @@ class UnitToppaWpDatabaseFacade extends UnitTestCase {
     }
 
     public function setUp() {
-        $this->dbFacade = new ToppaWpDatabaseFacade();
+        $autoLoader = new ToppaAutoLoaderWp('/toppa-libs');
+        $this->dbFacade = new ToppaDatabaseFacadeWp($autoLoader);
     }
 
     public function testGenerateSqlSelectStatement() {
@@ -39,4 +42,20 @@ class UnitToppaWpDatabaseFacade extends UnitTestCase {
         $this->assertEqual($sql, $expectedSql);
     }
 
+    public function testGenerateSqlUpdateStatement() {
+        $tableName = "test_table";
+        $keysAndValues = array('first_name' => 'Michael', 'last_name' => "O'Shea", 'age' => 40);
+        $whereKeysAndValues = array('person_id' => 243, 'active' => 'Y');
+        $sql = $this->dbFacade->generateSqlUpdateStatement($tableName, $keysAndValues, $whereKeysAndValues);
+        $expectedSql = "update test_table set first_name = 'Michael', last_name = 'O\'Shea', age = 40 where person_id = 243 and active = 'Y';";
+        $this->assertEqual($sql, $expectedSql);
+    }
+
+    public function testGenerateSqlDeleteStatement() {
+        $tableName = "test_table";
+        $whereKeysAndValues = array('person_id' => 243, 'active' => 'Y');
+        $sql = $this->dbFacade->generateSqlDeleteStatement($tableName, $whereKeysAndValues);
+        $expectedSql = "delete from test_table where person_id = 243 and active = 'Y';";
+        $this->assertEqual($sql, $expectedSql);
+    }
 }

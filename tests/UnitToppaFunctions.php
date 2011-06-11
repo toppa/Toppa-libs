@@ -1,6 +1,8 @@
 <?php
 
-require_once(dirname(__FILE__) . '/../ToppaFunctions.php');
+if (!class_exists('ToppaFunctions')) {
+    require_once(dirname(__FILE__) . '/../Lib/ToppaFunctions.php');
+}
 
 class UnitToppaFunctions extends UnitTestCase {
     public function __construct() {
@@ -28,6 +30,12 @@ class UnitToppaFunctions extends UnitTestCase {
         $testIn = array('ahoy1', ' AHOY2 ', 'Ahoy3');
         $testOut = array('ahoy1', 'ahoy2', 'ahoy3');
         $this->assertEqual($testOut, array_walk($testIn, array('ToppaFunctions', 'strtolowerCallback')));
+    }
+
+    public function testMakeTimestampPhpSafe() {
+        $this->assertEqual(ToppaFunctions::makeTimestampPhpSafe('13015246650000'), '13015246650');
+        $this->assertEqual(ToppaFunctions::makeTimestampPhpSafe('13015246650'), '13015246');
+        $this->assertEqual(ToppaFunctions::makeTimestampPhpSafe(null), '0');
     }
 
     public function testThrowExceptionIfNotString() {

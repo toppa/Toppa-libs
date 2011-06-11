@@ -1,26 +1,31 @@
 <?php
 
-require_once(dirname(__FILE__) . '/../ToppaWpDatabaseFacade.php');
+require_once(dirname(__FILE__) . '/../ToppaAutoLoaderWp.php');
 
 class IntegrationToppaWpDatabaseFacade extends UnitTestCase {
     private $dbFacade;
     private $tableName = 'delete_me';
-    private $refData =
-        array('test_column' => array(
+    private $refData = array(
+        'first_name' => array(
             'db' => array(
                 'type' => 'varchar',
                 'length' => '20',
                 'not_null' => true)
             ),
+        'age' => array(
+            'db' => array(
+                'type' => 'tinyint',
+                'not_null' => true)
+             ),
         );
 
     public function __construct() {
         $this->UnitTestCase();
-        $this->dbFacade = new ToppaWpDatabaseFacade();
     }
 
     public function setUp() {
-
+        $autoLoader = new ToppaAutoLoaderWp('/toppa-libs');
+        $this->dbFacade = new ToppaDatabaseFacadeWp($autoLoader);
     }
 
     public function testGetSetting() {
