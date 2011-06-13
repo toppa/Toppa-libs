@@ -11,10 +11,10 @@ class UnitToppaAutoLoaderWp extends UnitTestCase {
     }
 
     public function testHappyPath() {
-        $autoLoader = new ToppaAutoLoaderWp('/toppa-libs');
+        $autoLoader = new ToppaAutoLoaderWp('/toppa-plugin-libraries-for-wordpress');
         $autoLoader->setClassname('ToppaHtmlFormField');
         $autoLoader->setFullPath();
-        $expectedFullPath = WP_PLUGIN_DIR . '/toppa-libs/ToppaHtmlFormField.php';
+        $expectedFullPath = WP_PLUGIN_DIR . '/toppa-plugin-libraries-for-wordpress/ToppaHtmlFormField.php';
         $this->assertEqual($autoLoader->getFullPath(), $expectedFullPath);
         $this->assertEqual(1, $autoLoader->includeClass());
     }

@@ -1,3 +1,14 @@
-These are required libraries for the WordPress plugins Shashin 3 and SimpleTest
-for WordPress. They are installed as their own plugin. More information
-about my plugins is here: http://www.toppa.com/wordpress-plugins/
+IMPORTANT: When downloading from GitHub, rename the folder to
+toppa-plugin-libraries-for-wordpress before uploading to your WordPress
+plugin directory.
+
+GitHub contains the latest revisions of code for this project, which may
+not always be thoroughly tested.
+
+Official releases are provided at the WordPress plugin repository:
+http://wordpress.org/extend/plugins/toppa-plugin-libraries-for-wordpress/
+
+Please see readme.txt for additional information
+
+(GitHub wants a README, the WordPress plugin repository wants a
+readme.txt...)

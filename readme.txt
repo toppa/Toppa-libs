@@ -1,0 +1,31 @@
+=== Toppa Plugins Libraries for WordPress ===
+Contributors: Mike Toppa
+Tags: agile, database, unit test, testing, autoload, autoloader, facade
+Requires at least: 3.0
+Tested up to: 3.1.3
+Stable tag: 1.0
+
+Libraries to facilitate the use of Agile coding techniques for developing WordPress plugins. Contains required libraries for using plugins from toppa.com
+
+== Description ==
+
+**Overview**
+
+The Toppa Plugin Libraries for WordPress include several utilities for plugin developers. They facilitate the use of Agile coding techniques for developing WordPress plugins. This library is required for use of upcoming plugins from toppa.com. Each is written to conform to an object interface. This means that if you code your plugin against the interfaces, you can write unit tests for your plugin, and potentially use it outside of WordPress (you would need to write non-WordPress specific versions of the Toppa Library classes that conform to the interfaces, but you would not need to alter your plugin itself). The following libraries are included.
+
+* ToppaAutoloader: gives you an easy way to autoload class files for WordPress plugins. It conforms to the PSR-0 standard for autoloading in PHP, except it does not yet support namespaces (since WordPress currently is not intended for use with features that were introduced in PHP 5.3).
+* ToppaFunctionsFacade: creates a facade (wrapper) for functions that are custom to WordPress. This allows you to write your plugins without calling WordPress functions directly. This gives you the power to do two things: 1. write unit tests for your plugin, and 2. make your plugin potentially usable outside of WordPress.
+* ToppaDatabaseFacade: similar in concept to ToppaFunctionsFacade, but focuses on database interactions. In addition to creating wrappers for WordPress database calls, it includes enhanced functionality for tasks such as creating custom tables.
+* ToppaHtmlFormField: a lightweight utility for creating HTML form fields. It is not a complete form builder. Instead it is intended to make it very easy to create form fields in a standardized way, and then lets you use them however you like.
+
+See the [Toppa Plugin Libraries for WordPress page on my website](http://www.toppa.com/toppa-plugin-libraries-for-wordpress/) for more details and usage examples.
+
+== Installation ==
+
+Upload to your plugin folder just like any other plugin. This plugin does nothing by itself, so activation is optional.
+
+== Changelog ==
+
+= 1.0 =
+
+* First version

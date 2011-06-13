@@ -8,8 +8,8 @@ require_once(dirname(__FILE__) . '/../ToppaAutoLoaderWp.php');
 class ToppaLibsUnitTestsSuite extends TestSuite {
    function __construct() {
        parent::__construct();
-       $this->addFile('UnitToppaWpAutoLoader.php');
-       $this->addFile('UnitToppaWpDatabaseFacade.php');
+       $this->addFile('UnitToppaAutoLoaderWp.php');
+       $this->addFile('UnitToppaDatabaseFacadeWp.php');
        $this->addFile('UnitToppaFunctions.php');
        $this->addFile('UnitToppaHtmlFormField.php');
    }

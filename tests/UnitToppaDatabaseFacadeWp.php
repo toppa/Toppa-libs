@@ -12,7 +12,7 @@ class UnitToppaDatabaseFacadeWp extends UnitTestCase {
     }
 
     public function setUp() {
-        $autoLoader = new ToppaAutoLoaderWp('/toppa-libs');
+        $autoLoader = new ToppaAutoLoaderWp('/toppa-plugin-libraries-for-wordpress');
         $this->dbFacade = new ToppaDatabaseFacadeWp($autoLoader);
     }
 
