@@ -4,7 +4,7 @@ Donate link: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Tags: agile, database, unit test, testing, autoload, autoloader, facade
 Requires at least: 3.0
 Tested up to: 3.1.3
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Libraries to facilitate the use of Agile coding techniques for developing WordPress plugins. Contains required libraries for using plugins from toppa.com
 
@@ -23,11 +23,12 @@ See the [Toppa Plugin Libraries for WordPress page on my website](http://www.top
 
 == Installation ==
 
-Upload to your plugin folder just like any other plugin. This plugin does nothing by itself, so activation is optional.
+Upload to your plugin folder just like any other plugin, and activate.
 
 == Frequently Asked Questions ==
 
 * Requires PHP 5.1.2 or higher.
+* Requires WordPress 3.0 or higher.
 * See the [Toppa Plugin Libraries for WordPress page on my website](http://www.toppa.com/toppa-plugin-libraries-for-wordpress/) for more details and usage examples.
 * For troubleshooting help, please [post a comment in my latest post on WordPress plugins](http://www.toppa.com/category/technical/wordpress-plugins/).
 
@@ -36,3 +37,8 @@ Upload to your plugin folder just like any other plugin. This plugin does nothin
 = 1.0 =
 
 * First version
+
+= 1.0.1 =
+
+* Added WP constants definitions
+* Added activation function to make compatibility checks
