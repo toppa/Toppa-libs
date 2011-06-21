@@ -17,6 +17,10 @@ class ToppaFunctions {
         $string = strtolower($string);
     }
 
+    public static function stripslashesCallback(&$string, $key = null) {
+        $string = stripslashes($string);
+    }
+
     public static function makeTimestampPhpSafe($timestamp = null) {
         // if timestamp comes in as a float, it'll be translated to, e.g. 1.30152466512E+13
         // and casting it to an int will not give us the original number

@@ -248,20 +248,4 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
         global $wpdb;
         $string = (is_numeric($string) ? $string : ("'" . $wpdb->escape($string) . "'"));
     }
-
-    // Managing settings: http://www.presscoders.com/wordpress-settings-api-explained/
-    // http://striderweb.com/nerdaphernalia/2008/07/consolidate-options-with-arrays/
-    public function getSetting($setting) {
-        return get_option($setting);
-    }
-
-    public function setSetting($setting, $value) {
-        // true if value was changed, false otherwise
-        return update_option($setting, $value);
-    }
-
-    public function deleteSetting($setting) {
-        // true if successful, false if not
-        return delete_option($setting);
-    }
 }
