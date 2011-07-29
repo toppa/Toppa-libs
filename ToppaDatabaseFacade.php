@@ -18,4 +18,5 @@ interface ToppaDatabaseFacade {
     public function generateSqlDeleteStatement($tableName, array $whereKeysAndValues);
     public function executeQuery($sql, $callType = 'query', $returnType = ARRAY_A);
     public function sqlEscapeCallback(&$string, $key);
+    public function checkIsStringAndEscape($string);
 }

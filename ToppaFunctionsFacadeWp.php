@@ -7,6 +7,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
 
     }
 
+    public function getSiteUrl($pathToAppendToUrl = null, $schemeOverride = null) {
+        return site_url($pathToAppendToUrl, $schemeOverride);
+    }
+
     public function getUrlForCustomizableFile($fileName, $baseFile, $relativePath = null) {
         if (file_exists(get_stylesheet_directory() . '/' . $fileName)) {
             $url = get_bloginfo('stylesheet_directory') . '/' . $fileName;
@@ -87,6 +91,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
      */
     public function sanitizeString($string) {
         return sanitize_text_field($string);
+    }
+
+    public function dateI18n($dateFormat, $timestamp = false, $convertToGmt = false) {
+        return date_i18n($dateFormat, $timestamp, $convertToGmt);
     }
 
     // Managing settings: http://www.presscoders.com/wordpress-settings-api-explained/

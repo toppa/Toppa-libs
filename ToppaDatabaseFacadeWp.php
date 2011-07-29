@@ -61,6 +61,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
     public function verifyTableExists($tableName, array $refData) {
         global $wpdb;
+        $tableName = $this->checkIsStringAndEscape($tableName);
         $described = $wpdb->get_results("DESCRIBE $tableName;", ARRAY_A);
 
         if ($described[0]['Field'] == key($refData)) {
@@ -72,6 +73,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
     public function dropTable($tableName) {
         global $wpdb;
+        $tableName = $this->checkIsStringAndEscape($tableName);
         $sql = "drop table if exists $tableName;";
         return $wpdb->query($sql); // always returns 0
     }
@@ -83,16 +85,18 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
     public function sqlSelectMultipleRows($tableName, array $fieldsToSelect = null, array $whereKeysAndValues = null, $otherConditions = null) {
         $sql = $this->generateSqlSelectStatement($tableName, $fieldsToSelect, $whereKeysAndValues, $otherConditions);
+        //var_dump($sql);
         return $this->executeQuery($sql, 'get_results');
     }
 
     public function generateSqlSelectStatement($tableName, array $fieldsToSelect = null, array $whereKeysAndValues = null, $otherConditions = null) {
-        ToppaFunctions::throwExceptionIfNotString($tableName);
-
+        $tableName = $this->checkIsStringAndEscape($tableName);
         $sql = "select ";
 
         if (is_array($fieldsToSelect)) {
-            $sql .= implode(", ", $fieldsToSelect);
+            $fields = implode(", ", $fieldsToSelect);
+            $fields = $this->checkIsStringAndEscape($fields);
+            $sql .= $fields;
         }
 
         else {
@@ -112,7 +116,8 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
             $sql = substr($sql, 0, -4);
         }
 
-        if (is_string($otherConditions)) {
+        if ($otherConditions) {
+            $otherConditions = $this->checkIsStringAndEscape($otherConditions);
             $sql .= $otherConditions;
         }
 
@@ -128,9 +133,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
     }
 
     public function generateSqlInsertStatement($tableName, array $keysAndValues, $onDuplicateKeyUpdate = false) {
-        ToppaFunctions::throwExceptionIfNotString($tableName);
-        ToppaFunctions::throwExceptionIfNotArray($keysAndValues);
-
+        $tableName = $this->checkIsStringAndEscape($tableName);
         $keys = array_keys($keysAndValues);
         $values = array_values($keysAndValues);
         array_walk($values, array($this, 'sqlEscapeCallback'));
@@ -166,9 +169,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
     }
 
     public function generateSqlUpdateStatement($tableName, array $keysAndValues, array $whereKeysAndValues = null) {
-        ToppaFunctions::throwExceptionIfNotString($tableName);
-        ToppaFunctions::throwExceptionIfNotArray($keysAndValues);
-
+        $tableName = $this->checkIsStringAndEscape($tableName);
         $sql = "update $tableName set ";
         array_walk($keysAndValues, array($this, 'sqlEscapeCallback'));
 
@@ -199,11 +200,8 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
     }
 
     public function generateSqlDeleteStatement($tableName, array $whereKeysAndValues) {
-        ToppaFunctions::throwExceptionIfNotString($tableName);
-        ToppaFunctions::throwExceptionIfNotArray($whereKeysAndValues);
-
+        $tableName = $this->checkIsStringAndEscape($tableName);
         $sql = "delete from $tableName where ";
-
         array_walk($whereKeysAndValues, array($this, 'sqlEscapeCallback'));
 
         foreach($whereKeysAndValues as $k=>$v) {
@@ -247,5 +245,11 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
     public function sqlEscapeCallback(&$string, $key) {
         global $wpdb;
         $string = (is_numeric($string) ? $string : ("'" . $wpdb->escape($string) . "'"));
+    }
+
+    public function checkIsStringAndEscape($string) {
+        global $wpdb;
+        ToppaFunctions::throwExceptionIfNotString($string);
+        return $wpdb->escape($string);
     }
 }
