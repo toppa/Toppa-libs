@@ -43,6 +43,9 @@ class ToppaHtmlFormField {
         case 'text':
             return $this->buildTextField();
             break;
+        case 'password':
+            return $this->buildPasswordField();
+            break;
         case 'radio':
             return $this->buildRadioGroup();
             break;
@@ -77,6 +80,19 @@ class ToppaHtmlFormField {
     private function buildTextField() {
         $this->startTag('input');
         $this->addAttribute('type', 'text');
+        $this->addAttribute('name', $this->name);
+        $this->addAttribute('id', $this->id);
+        $this->addAttribute('value', $this->value);
+        $this->addAttribute('size', $this->refData['input']['size']);
+        $this->addAttribute('class', $this->cssClass);
+        $this->addAttribute('maxlength', $this->refData['db']['length']);
+        $this->selfCloseTag();
+        return $this->tag;
+    }
+
+    private function buildPasswordField() {
+        $this->startTag('input');
+        $this->addAttribute('type', 'password');
         $this->addAttribute('name', $this->name);
         $this->addAttribute('id', $this->id);
         $this->addAttribute('value', $this->value);

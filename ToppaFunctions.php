@@ -71,4 +71,16 @@ class ToppaFunctions {
     public static function path() {
         return dirname(__FILE__);
     }
+
+    public static function getFileExtension($fileName) {
+        ToppaFunctions::throwExceptionIfNotString($fileName);
+        $fileNameParts = explode('.', $fileName);
+        $lastIndexPosition = count($fileNameParts) - 1;
+
+        if (!$lastIndexPosition) {
+            return null;
+        }
+
+        return $fileNameParts[$lastIndexPosition];
+    }
 }

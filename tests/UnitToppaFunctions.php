@@ -84,4 +84,14 @@ class UnitToppaFunctions extends UnitTestCase {
             $this->pass();
         }
     }
+
+    public function testGetFileExtensionUsingNameWithMultipleDots() {
+        $extension = ToppaFunctions::getFileExtension('video.test.name.mpg');
+        $this->assertEqual('mpg', $extension);
+    }
+
+    public function testGetFileExtensionUsingNameWithNoDots() {
+        $extension = ToppaFunctions::getFileExtension('video');
+        $this->assertEqual(null, $extension);
+    }
 }
