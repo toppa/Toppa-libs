@@ -108,7 +108,7 @@ class ToppaHtmlFormField {
             $this->startTag('input');
             $this->addAttribute('type', 'radio');
             $this->addAttribute('name', $this->name);
-            $this->addAttribute('id', $this->id);
+            $this->addAttribute('id', $this->id . '_' . str_replace(' ', '_', $value));
             $this->addAttribute('value', $value);
             $this->addAttribute('class', $this->cssClass);
             $this->addChecked($value, $this->value);
@@ -135,7 +135,7 @@ class ToppaHtmlFormField {
             $this->addClosingTag('option');
             $this->tagGroup .= $this->tag;
         }
-
+        $this->tag = ''; // clears out last option that was set
         $this->addClosingTag('select');
         $this->tagGroup .= $this->tag;
         return $this->tagGroup;
@@ -165,10 +165,11 @@ class ToppaHtmlFormField {
         foreach ($this->refData['input']['subgroup'] as $value=>$label) {
             $this->startTag('input');
             $this->addAttribute('type', 'checkbox');
-            $this->addAttribute('name', $this->name);
-            $this->addAttribute('id', $this->id);
+            $this->addNameAsArrayField('name', $this->name);
+            $this->addAttribute('value', $value);
+            $this->addAttribute('id', $this->id . '_' . str_replace(' ', '_', $value));
             $this->addAttribute('class', $this->cssClass);
-            $this->addChecked($value, $this->value);
+            $this->addCheckedForArrayValue($value, $this->value);
             $this->selfCloseTag($label);
             $this->tagGroup .= $this->tag;
         }
@@ -197,7 +198,7 @@ class ToppaHtmlFormField {
     }
 
     private function closeTag($text = null) {
-        $this->tag .= '>$text';
+        $this->tag .= ">$text";
     }
 
     private function addClosingTag($tag) {
@@ -205,15 +206,26 @@ class ToppaHtmlFormField {
     }
 
     private function addAttribute($type, $value = null) {
-        if (!$value) {
+        if (!strlen($value)) {
             return null;
         }
 
         $this->tag .= " $type=\"" . htmlspecialchars($value) . '"';
     }
 
+    private function addNameAsArrayField($name, $value = null) {
+        $value .= '[]';
+        return $this->addAttribute($name, $value);
+    }
+
     private function addChecked($default, $value) {
         if ($default == $value) {
+            $this->tag .= ' checked="checked"';
+        }
+    }
+
+    private function addCheckedForArrayValue($default, $value) {
+        if ($value && in_array($default, $value)) {
             $this->tag .= ' checked="checked"';
         }
     }

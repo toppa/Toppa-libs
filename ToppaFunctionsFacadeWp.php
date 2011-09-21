@@ -44,6 +44,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return is_page($anyPageIdentifier);
     }
 
+    public function getPermalink() {
+        return get_permalink();
+    }
+
     public function checkFileExists($path) {
         return file_exists($path);
     }

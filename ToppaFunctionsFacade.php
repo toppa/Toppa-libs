@@ -7,6 +7,7 @@ interface ToppaFunctionsFacade {
     public function getPluginsPath();
     public function getPluginDirectoryName($path);
     public function enqueueStylesheet($handle, $relativePath, $dependencies = false, $version = null, $media = null);
+    public function getPermalink();
     public function isPage($anyPageIdentifier);
     public function checkFileExists($path);
     public function getHttpRequestObject();
