@@ -2,6 +2,7 @@
 
 interface ToppaFunctionsFacade {
     public function __construct();
+    public function getSiteUrl($pathToAppendToUrl = null, $schemeOverride = null);
     public function getUrlForCustomizableFile($fileName, $baseFile, $relativePath = null);
     public function getPluginsUrl($relativePath, $baseFile);
     public function getPluginsPath();
