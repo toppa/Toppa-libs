@@ -236,7 +236,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
         }
 
         if ($result === false) {
-            throw new Exception(__('Database query failed for SQL statement: ', 'shashin') . $sql);
+            throw new Exception(__('Database query failed for SQL statement: ', 'toppalibs') . $sql);
         }
 
         return $result;

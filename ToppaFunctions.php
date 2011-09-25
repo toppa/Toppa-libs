@@ -58,7 +58,7 @@ class ToppaFunctions {
 
     public static function throwExceptionIfNotString($expectedString) {
         if (!is_string($expectedString)) {
-             throw new Exception(__('Not a string', 'shashin'));
+             throw new Exception(__('Not a string', 'toppalibs'));
         }
 
 
@@ -67,7 +67,7 @@ class ToppaFunctions {
 
     public static function throwExceptionIfNotArray($expectedArray) {
         if (!is_array($expectedArray)) {
-             throw new Exception(__('Not an array', 'shashin'));
+             throw new Exception(__('Not an array', 'toppalibs'));
         }
         return true;
     }

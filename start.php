@@ -4,7 +4,7 @@ Plugin Name: Toppa Plugins Libraries for WordPress
 Plugin URI: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Description: Libraries to facilitate the use of Agile coding techniques for developing WordPress plugins. Contains required libraries for using plugins from toppa.com
 Author: Michael Toppa
-Version: 1.0.3
+Version: 1.0.4
 Author URI: http://www.toppa.com
 */
 
@@ -17,14 +17,20 @@ if (!defined('WP_PLUGIN_DIR')) define('WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugin
 if (!defined('WPMU_PLUGIN_URL')) define('WPMU_PLUGIN_URL', WP_CONTENT_URL. '/mu-plugins');
 if (!defined('WPMU_PLUGIN_DIR')) define('WPMU_PLUGIN_DIR', WP_CONTENT_DIR . '/mu-plugins');
 
+load_plugin_textdomain('toppalibs', false, basename(dirname(__FILE__)) . '/languages/');
 register_activation_hook(__FILE__, 'toppaLibsActivate');
 
 function toppaLibsActivate() {
     if (!function_exists('spl_autoload_register')) {
-        trigger_error('You must have at least PHP 5.1.2 to use SimpleTest for WordPress (this is not actually a PHP error)', E_USER_ERROR);
+        toppaLibsCancelActivation(__('You must have at least PHP 5.1.2 to use Toppa Plugin Libraries for WordPress', 'toppalibs'));
     }
 
-    if (version_compare(get_bloginfo('version'), '3.0', '<')) {
-        trigger_error('You must have at least WordPress 3.0 to use SimpleTest for WordPress (this is not actually a PHP error)', E_USER_ERROR);
+    elseif (version_compare(get_bloginfo('version'), '3.0', '<')) {
+        toppaLibsCancelActivation(__('You must have at least WordPress 3.0 to use Toppa Plugin Libraries for WordPress', 'toppalibs'));
     }
+}
+
+function toppaLibsCancelActivation($message) {
+    deactivate_plugins(basename(__FILE__));
+    wp_die($message);
 }
