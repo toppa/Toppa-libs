@@ -4,11 +4,65 @@ require_once('ToppaFunctionsFacade.php');
 
 class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
     public function __construct() {
-
     }
 
-    public function getSiteUrl($pathToAppendToUrl = null, $schemeOverride = null) {
-        return site_url($pathToAppendToUrl, $schemeOverride);
+    public function useHook($hook, $customFunction, $priority = null, $numberOfAcceptedArgs = null) {
+        if ($priority && $numberOfAcceptedArgs) {
+            return add_action($hook, $customFunction, $priority, $numberOfAcceptedArgs);
+        }
+
+        elseif ($priority) {
+            return add_action($hook, $customFunction, $priority);
+        }
+
+        return add_action($hook, $customFunction);
+    }
+
+    public function useFilter($filter, $customFunction, $priority = null, $numberOfAcceptedArgs = null) {
+        if ($priority && $numberOfAcceptedArgs) {
+            return add_filter($filter, $customFunction, $priority, $numberOfAcceptedArgs);
+        }
+
+        elseif ($priority) {
+            return add_filter($filter, $customFunction, $priority);
+        }
+
+        return add_filter($filter, $customFunction);
+    }
+
+    public function addToMediaMenu($customFunction) {
+        return wp_iframe($customFunction);
+    }
+
+    public function prepMediaMenuCss($urlSnippet) {
+        $filename = array_shift(explode('?', basename($_SERVER['REQUEST_URI'])));
+        if ($filename == 'media-upload.php' && strstr($_SERVER['REQUEST_URI'], $urlSnippet)) {
+            return wp_admin_css('css/media');
+        }
+    }
+
+    public function addMediaMenuHeader() {
+        return media_upload_header();
+    }
+
+    public function getSiteUrl($pathToAppendToUrl = null, $scheme = null) {
+        if (!$scheme && isset($_SERVER['HTTPS'])) {
+            $scheme = 'https';
+        }
+
+        return site_url($pathToAppendToUrl, $scheme);
+    }
+
+    public function getAdminUrl($pathToAppendToUrl = null, $scheme = null) {
+        if (!$scheme && isset($_SERVER['HTTPS'])) {
+            $scheme = 'https';
+        }
+
+        elseif (!$scheme) {
+            $scheme = 'admin';
+        }
+
+        return admin_url($pathToAppendToUrl, $scheme);
     }
 
     public function getUrlForCustomizableFile($fileName, $baseFile, $relativePath = null) {
@@ -37,6 +91,14 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
 
     public function enqueueStylesheet($handle, $relativePath, $dependencies = false, $version = null, $media = null) {
         return wp_enqueue_style($handle, $relativePath, $dependencies, $version, $media);
+    }
+
+    public function enqueueScript($handle, $relativePath, $dependencies = false, $version = null, $media = null) {
+        return wp_enqueue_script($handle, $relativePath, $dependencies, $version, $media);
+    }
+
+    public function localizeScript($handle, $objectName, $data) {
+        wp_localize_script($handle, $objectName, $data);
     }
 
     // works with page slug, ID, or title

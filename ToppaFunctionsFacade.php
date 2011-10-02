@@ -2,12 +2,20 @@
 
 interface ToppaFunctionsFacade {
     public function __construct();
-    public function getSiteUrl($pathToAppendToUrl = null, $schemeOverride = null);
+    public function useHook($hook, $customFunctionToCall, $priority = null, $numberOfAcceptedArgs = null);
+    public function useFilter($filter, $customFunctionToCall, $priority = null, $numberOfAcceptedArgs = null);
+    public function addToMediaMenu($customFunction);
+    public function prepMediaMenuCss($urlSnippet);
+    public function addMediaMenuHeader();
+    public function getSiteUrl($pathToAppendToUrl = null, $scheme = null);
+    public function getAdminUrl($pathToAppendToUrl = null, $scheme = null);
     public function getUrlForCustomizableFile($fileName, $baseFile, $relativePath = null);
     public function getPluginsUrl($relativePath, $baseFile);
     public function getPluginsPath();
     public function getPluginDirectoryName($path);
     public function enqueueStylesheet($handle, $relativePath, $dependencies = false, $version = null, $media = null);
+    public function enqueueScript($handle, $relativePath, $dependencies = false, $version = null, $media = null);
+    public function localizeScript($handle, $objectName, $data);
     public function getPermalink();
     public function isPage($anyPageIdentifier);
     public function checkFileExists($path);
