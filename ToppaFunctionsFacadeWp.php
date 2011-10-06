@@ -36,7 +36,7 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
 
     public function prepMediaMenuCss($urlSnippet) {
         $filename = array_shift(explode('?', basename($_SERVER['REQUEST_URI'])));
-        if ($filename == 'media-upload.php' && strstr($_SERVER['REQUEST_URI'], $urlSnippet)) {
+        if ($filename == 'media-upload.php' && strpos($_SERVER['REQUEST_URI'], $urlSnippet) !== false) {
             return wp_admin_css('css/media');
         }
     }
