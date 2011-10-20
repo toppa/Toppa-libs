@@ -252,4 +252,11 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
         ToppaFunctions::throwExceptionIfNotString($string);
         return $wpdb->escape($string);
     }
+
+    public function getIntTypes() {
+        return array(
+            'tinyint', 'smallint', 'mediumint', 'int', 'bigint',
+            'tinyint unsigned', 'smallint unsigned', 'mediumint unsigned', 'int unsigned', 'bigint unsigned'
+        );
+    }
 }

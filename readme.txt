@@ -4,7 +4,7 @@ Donate link: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Tags: agile, database, unit test, testing, autoload, autoloader, facade
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.0.4
+Stable tag: 1.0.6
 
 Libraries to facilitate the use of Agile coding techniques for developing WordPress plugins. Contains required libraries for using plugins from toppa.com
 
@@ -34,25 +34,25 @@ Upload to your plugin folder just like any other plugin, and activate.
 
 == Changelog ==
 
+= 1.0.6 =
+* Added getIntTypes() to ToppaDatabaseFacade
+
+= 1.0.5 =
+* Added 9 more functions to ToppaFunctionsFacade
+
 = 1.0.4 =
 * More user friendly handling of activation errors
 * Added .pot language translation file
 
 = 1.0.3 =
-* added ToppaFunctions::htmlentitiesCallback()
-* added ToppaFunctions::getFileExtension()
-* added ToppaFunctionsFacade::getPermalink()
-* added ToppaFunctionsFacade::dateI18n()
-* added ToppaFunctionsFacade::getSiteUrl()
-* added ToppaFunctionsFacade::checkIsStringAndEscape()
-* added ToppaHtmlFormField::buildPasswordField()
-* added fixed html ids for radio buttons in ToppaHtmlFormField::buildRadioGroup()
-* debugged ToppaHtmlFormField::buildCheckboxGroup()
-* debugged ToppaHtmlFormField::closeTag()
+* Added 6 more functions to ToppaFunctionsFacade
+* Added fixed html ids for radio buttons in ToppaHtmlFormField::buildRadioGroup()
+* Debugged ToppaHtmlFormField::buildCheckboxGroup()
+* Debugged ToppaHtmlFormField::closeTag()
 
 = 1.0.2 =
-* Moved settings functions from database facade to functions facade
-* Added 8 more functions to the functions facade
+* Moved settings functions from database facade to ToppaFunctionsFacade
+* Added 8 more functions to ToppaFunctionsFacade
 
 = 1.0.1 =
 * Added WP constants definitions

@@ -19,4 +19,5 @@ interface ToppaDatabaseFacade {
     public function executeQuery($sql, $callType = 'query', $returnType = ARRAY_A);
     public function sqlEscapeCallback(&$string, $key);
     public function checkIsStringAndEscape($string);
+    public function getIntTypes();
 }
