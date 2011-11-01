@@ -85,7 +85,6 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
     public function sqlSelectMultipleRows($tableName, array $fieldsToSelect = null, array $whereKeysAndValues = null, $otherConditions = null) {
         $sql = $this->generateSqlSelectStatement($tableName, $fieldsToSelect, $whereKeysAndValues, $otherConditions);
-        //var_dump($sql);
         return $this->executeQuery($sql, 'get_results');
     }
 
@@ -117,7 +116,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
         }
 
         if ($otherConditions) {
-            $otherConditions = $this->checkIsStringAndEscape($otherConditions);
+            ToppaFunctions::throwExceptionIfNotString($otherConditions);
             $sql .= $otherConditions;
         }
 
