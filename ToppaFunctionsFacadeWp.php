@@ -54,7 +54,7 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
     }
 
     public function getAdminUrl($pathToAppendToUrl = null, $scheme = null) {
-        if (!$scheme && isset($_SERVER['HTTPS'])) {
+        if (!$scheme && is_ssl()) {
             $scheme = 'https';
         }
 
