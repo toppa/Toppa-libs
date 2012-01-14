@@ -28,10 +28,10 @@ abstract class ToppaSettingsWp implements ToppaSettings {
     }
 
     public function refresh() {
-        $oldSettings = $this->functionsFacade->getSetting($this->name);
+        $currentSettings = $this->functionsFacade->getSetting($this->name);
 
-        if (is_array($oldSettings)) {
-            $this->data = $oldSettings;
+        if (is_array($currentSettings)) {
+            $this->data = $currentSettings;
         }
 
         return $this->data;
