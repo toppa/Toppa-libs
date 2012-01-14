@@ -4,9 +4,6 @@ interface ToppaFunctionsFacade {
     public function __construct();
     public function useHook($hook, $customFunctionToCall, $priority = null, $numberOfAcceptedArgs = null);
     public function useFilter($filter, $customFunctionToCall, $priority = null, $numberOfAcceptedArgs = null);
-    public function addToMediaMenu($customFunction);
-    public function prepMediaMenuCss($urlSnippet);
-    public function addMediaMenuHeader();
     public function getSiteUrl($pathToAppendToUrl = null, $scheme = null);
     public function getAdminUrl($pathToAppendToUrl = null, $scheme = null);
     public function getUrlForCustomizableFile($fileName, $baseFile, $relativePath = null);

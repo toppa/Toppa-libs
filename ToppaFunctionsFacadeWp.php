@@ -30,21 +30,6 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return add_filter($filter, $customFunction);
     }
 
-    public function addToMediaMenu($customFunction) {
-        return wp_iframe($customFunction);
-    }
-
-    public function prepMediaMenuCss($urlSnippet) {
-        $filename = array_shift(explode('?', basename($_SERVER['REQUEST_URI'])));
-        if ($filename == 'media-upload.php' && strpos($_SERVER['REQUEST_URI'], $urlSnippet) !== false) {
-            return wp_admin_css('css/media');
-        }
-    }
-
-    public function addMediaMenuHeader() {
-        return media_upload_header();
-    }
-
     public function getSiteUrl($pathToAppendToUrl = null, $scheme = null) {
         if (!$scheme && isset($_SERVER['HTTPS'])) {
             $scheme = 'https';
@@ -85,6 +70,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return WP_PLUGIN_DIR;
     }
 
+    public function getBasePath() {
+        return ABSPATH;
+    }
+
     public function getPluginDirectoryName($path) {
         return dirname(plugin_basename($path));
     }
@@ -108,10 +97,6 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
 
     public function getPermalink() {
         return get_permalink();
-    }
-
-    public function checkFileExists($path) {
-        return file_exists($path);
     }
 
     // unfortunately WP_Http is not written to a more generic interface
@@ -177,5 +162,18 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
     public function deleteSetting($setting) {
         // true if successful, false if not
         return delete_option($setting);
+    }
+
+    // File system functions
+    public function checkFileExists($path) {
+        return file_exists($path);
+    }
+
+    public function requireOnce($path) {
+        return require_once $path;
+    }
+
+    public function directoryName($path) {
+        return dirname($path);
     }
 }
