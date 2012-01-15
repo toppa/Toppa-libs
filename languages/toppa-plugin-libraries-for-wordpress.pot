@@ -1,17 +1,21 @@
-# Copyright (C) 2010 
+# Copyright (C) 2012 
 # This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/toppa-plugin-libraries-for-"
 "wordpress\n"
-"POT-Creation-Date: 2011-11-01 00:29:37+00:00\n"
+"POT-Creation-Date: 2012-01-15 00:07:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: ToppaDatabaseFacadeWp.php:238
+msgid "Database query failed for SQL statement: "
+msgstr ""
 
 #: start.php:25
 msgid ""
@@ -24,14 +28,18 @@ msgid ""
 "WordPress"
 msgstr ""
 
-#: ToppaDatabaseFacadeWp.php:238
-msgid "Database query failed for SQL statement: "
-msgstr ""
-
 #: ToppaFunctions.php:61
 msgid "Not a string"
 msgstr ""
 
 #: ToppaFunctions.php:70
 msgid "Not an array"
+msgstr ""
+
+#: ToppaSettingsWp.php:27
+msgid "Invalid data property __get for "
+msgstr ""
+
+#: ToppaSettingsWp.php:59
+msgid "Failed to delete settings"
 msgstr ""
