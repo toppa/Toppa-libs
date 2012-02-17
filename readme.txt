@@ -4,7 +4,7 @@ Donate link: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Tags: agile, database, unit test, testing, autoload, autoloader, facade
 Requires at least: 3.0
 Tested up to: 3.3.1
-Stable tag: 1.1.1
+Stable tag: 1.2
 
 Facilitates the use of Agile coding techniques in developing WordPress plugins. Contains required libraries for using plugins from toppa.com
 
@@ -33,6 +33,11 @@ Upload to your plugin folder just like any other plugin, and activate.
 * For troubleshooting help, please [post a comment in my latest post on WordPress plugins](http://www.toppa.com/category/technical/wordpress-plugins/).
 
 == Changelog ==
+
+= 1.2 =
+* Added callFunctionForNetworkSites() to ToppaFunctionsFacade
+* Apply wpdb charset and collate defaults, if available, when creating a table
+* Better error reporting if there is a db error
 
 = 1.1.1 = Added filesystem functions to ToppaFunctionsFacade
 
