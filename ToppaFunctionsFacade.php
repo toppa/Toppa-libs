@@ -22,6 +22,7 @@ interface ToppaFunctionsFacade {
     public function checkAdminNonceFields($myActionName = null, $nonceFieldName = '_wpnonce');
     public function checkPublicNonceField($nonce, $nonceName = -1);
     public function setShortcodeAttributes(array $shortcodeDefaults, $userShortcode);
+    public function callFunctionForNetworkSites($callback);
     public function checkEmailHasValidFormat($email);
     public function sendEmail($to, $subject = null, $message = null, $headers = null, array $attachments = null);
     public function sanitizeString($string);

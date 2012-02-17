@@ -128,6 +128,28 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return shortcode_atts($shortcodeDefaults, $userShortcode);
     }
 
+    public function callFunctionForNetworkSites($callback, $checkNetworkwide = true) {
+        global $wpdb;
+
+        if (function_exists('is_multisite') && is_multisite()) {
+            // for a plugin uninstall, $_GET['networkwide'] is not set
+            if (!$checkNetworkwide || ($checkNetworkwide && isset($_GET['networkwide']) && $_GET['networkwide'] == 1)) {
+                $blogIds = $wpdb->get_col($wpdb->prepare("SELECT blog_id FROM $wpdb->blogs"));
+
+                foreach ($blogIds as $blogId) {
+                    switch_to_blog($blogId);
+                    call_user_func($callback);
+                }
+
+                restore_current_blog();
+                return true;
+            }
+        }
+
+        call_user_func($callback);
+        return true;
+    }
+
     public function checkEmailHasValidFormat($email) {
         return is_email($email);
     }
