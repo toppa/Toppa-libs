@@ -1,17 +1,11 @@
-Toppa Plugin Libraries for WordPress
-
-Libraries to facilitate the use of Agile coding techniques for developing
-WordPress plugins. Contains required libraries for using plugins from toppa.com
-
-Please see readme.txt for additional information (GitHub wants a README, the
-WordPress plugin repository wants a readme.txt...)
-
 IMPORTANT: When downloading from GitHub, you must rename the folder to
 toppa-plugin-libraries-for-wordpress before uploading to your WordPress
-plugin directory.
+plugin directory. Othe plugins that use it require this folder name.
 
 GitHub contains the latest revisions of code for this project, which may
 not always be thoroughly tested.
 
 Official releases are provided at the WordPress plugin repository:
 http://wordpress.org/extend/plugins/toppa-plugin-libraries-for-wordpress/
+
+Please see readme.txt for additional information
