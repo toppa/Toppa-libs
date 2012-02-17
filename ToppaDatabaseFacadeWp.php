@@ -52,7 +52,10 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
         // strip trailing comma and linebreak
         $sql = substr($sql, 0, -2);
-        $sql .= "\n)\nDEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+
+        $charset = $wpdb->charset ? $wpdb->charset : 'utf8';
+        $collate = $wpdb->collate ? $wpdb->collate : 'utf8_general_ci';
+        $sql .= "\n)\nDEFAULT CHARACTER SET $charset COLLATE $collate;";
 
         // dbDelta returns an array of strings - won't tell you if there
         // was an error
@@ -234,8 +237,14 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
             break;
         }
 
-        if ($result === false) {
-            throw new Exception(__('Database query failed for SQL statement: ', 'toppalibs') . $sql);
+        if ($wpdb->result === false) {
+            throw new Exception(
+                __('Database query failed. Error message: ', 'toppalibs')
+                . $wpdb->last_error
+                . '<br />'
+                . __('SQL statement: ', 'toppalibs')
+                . $sql
+            );
         }
 
         return $result;
