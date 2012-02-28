@@ -159,6 +159,14 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
     }
 
     /*
+     * Encodes < > & " ' (less than, greater than, ampersand, double quote, single quote).
+     * Will never double encode entities.
+     */
+    public function htmlSpecialCharsOnce($string) {
+        return esc_attr($string);
+    }
+
+    /*
      * WordPress function checks for invalid UTF-8, Convert single < characters to entity,
      * strip all tags,remove line breaks, tabs and extra white space, strip octets.
      */
