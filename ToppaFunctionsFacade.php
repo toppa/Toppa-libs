@@ -25,6 +25,7 @@ interface ToppaFunctionsFacade {
     public function callFunctionForNetworkSites($callback);
     public function checkEmailHasValidFormat($email);
     public function sendEmail($to, $subject = null, $message = null, $headers = null, array $attachments = null);
+    public function htmlSpecialCharsOnce($string);
     public function sanitizeString($string);
     public function htmlSpecialCharsOnce($string);
     public function dateI18n($dateFormat, $timestamp = false, $convertToGmt = false);
