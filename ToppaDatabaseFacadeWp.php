@@ -13,52 +13,56 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
     }
 
     public function createTable($tableName, array $refData) {
+        global $wpdb;
+
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         $sql = "CREATE TABLE $tableName (\n";
 
         foreach ($refData as $k=>$v) {
             $sql .= $k . " " . $v['db']['type'];
 
-            if (strlen($v['db']['length'])) {
+            if (isset($v['db']['length'])) {
                 $sql .= "(" . $v['db']['length'];
 
-                if (strlen($v['db']['precision'])) {
+                if (isset($v['db']['precision'])) {
                     $sql .= "," . $v['db']['precision'];
                 }
 
                 $sql .= ")";
             }
 
-            if ($v['db']['not_null']) {
+            if (isset($v['db']['not_null'])) {
                 $sql .= " NOT NULL";
             }
 
-            // dbDelta requires 2 spaces in front of primary key declaration
-            if ($v['db']['primary_key']) {
-                $sql .= "  PRIMARY KEY";
-            }
-
-            if (strlen($v['db']['other'])) {
+            if (isset($v['db']['other'])) {
                 $sql .= " " . $v['db']['other'];
             }
 
             $sql .= ",\n";
 
-            // dbDelta requires unique indexes declared at the end, using KEY
-            if ($v['db']['unique_key']) {
-                $sql .= "UNIQUE KEY $k ($k),\n";
+            $sql_append = '';
+
+            // dbDelta requires primary and unique indexes declared at the end, using KEY
+            if (isset($v['db']['primary_key'])) {
+                $sql_append .= "PRIMARY KEY $k ($k),\n";
+            }
+
+            if (isset($v['db']['unique_key'])) {
+                $sql_append .= "UNIQUE KEY $k ($k),\n";
             }
         }
 
+        $sql .= $sql_append;
+
         // strip trailing comma and linebreak
         $sql = substr($sql, 0, -2);
-
         $charset = $wpdb->charset ? $wpdb->charset : 'utf8';
         $collate = $wpdb->collate ? $wpdb->collate : 'utf8_general_ci';
         $sql .= "\n)\nDEFAULT CHARACTER SET $charset COLLATE $collate;";
 
-        // dbDelta returns an array of strings - won't tell you if there
-        // was an error
+        // dbDelta returns an array of strings
+        // if there's an error wp-db will print it directly
         return dbDelta($sql, true);
     }
 
