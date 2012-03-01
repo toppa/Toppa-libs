@@ -166,6 +166,13 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return sanitize_text_field($string);
     }
 
+   /*
+    * Encodes < > & " ' (less than, greater than, ampersand, double quote, single quote).
+    * Will never double encode entities.
+    */
+    public function htmlSpecialCharsOnce($string) {
+        return esc_attr($string);
+    }
     public function dateI18n($dateFormat, $timestamp = false, $convertToGmt = false) {
         return date_i18n($dateFormat, $timestamp, $convertToGmt);
     }
