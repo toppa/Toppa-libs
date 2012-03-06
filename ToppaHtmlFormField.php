@@ -80,12 +80,18 @@ class ToppaHtmlFormField {
     private function buildTextField() {
         $this->startTag('input');
         $this->addAttribute('type', 'text');
-        $this->addAttribute('name', $this->name);
-        $this->addAttribute('id', $this->id);
-        $this->addAttribute('value', $this->value);
-        $this->addAttribute('size', $this->refData['input']['size']);
-        $this->addAttribute('class', $this->cssClass);
-        $this->addAttribute('maxlength', $this->refData['db']['length']);
+        if (isset($this->name))
+            $this->addAttribute('name', $this->name);
+        if (isset($this->id))
+            $this->addAttribute('id', $this->id);
+        if (isset($this->value))
+            $this->addAttribute('value', $this->value);
+        if (isset($this->refData['input']['size']))
+            $this->addAttribute('size', $this->refData['input']['size']);
+        if (isset($this->cssClass))
+            $this->addAttribute('class', $this->cssClass);
+        if (isset($this->refData['db']['length']))
+            $this->addAttribute('maxlength', $this->refData['db']['length']);
         $this->selfCloseTag();
         return $this->tag;
     }
@@ -93,12 +99,18 @@ class ToppaHtmlFormField {
     private function buildPasswordField() {
         $this->startTag('input');
         $this->addAttribute('type', 'password');
-        $this->addAttribute('name', $this->name);
-        $this->addAttribute('id', $this->id);
-        $this->addAttribute('value', $this->value);
-        $this->addAttribute('size', $this->refData['input']['size']);
-        $this->addAttribute('class', $this->cssClass);
-        $this->addAttribute('maxlength', $this->refData['db']['length']);
+        if (isset($this->name))
+            $this->addAttribute('name', $this->name);
+        if (isset($this->id))
+            $this->addAttribute('id', $this->id);
+        if (isset($this->value))
+            $this->addAttribute('value', $this->value);
+        if (isset($this->refData['input']['size']))
+            $this->addAttribute('size', $this->refData['input']['size']);
+        if (isset($this->cssClass))
+            $this->addAttribute('class', $this->cssClass);
+        if (isset($this->refData['db']['length']))
+            $this->addAttribute('maxlength', $this->refData['db']['length']);
         $this->selfCloseTag();
         return $this->tag;
     }
@@ -107,11 +119,16 @@ class ToppaHtmlFormField {
         foreach ($this->refData['input']['subgroup'] as $value=>$label) {
             $this->startTag('input');
             $this->addAttribute('type', 'radio');
-            $this->addAttribute('name', $this->name);
-            $this->addAttribute('id', $this->id . '_' . str_replace(' ', '_', $value));
-            $this->addAttribute('value', $value);
-            $this->addAttribute('class', $this->cssClass);
-            $this->addChecked($value, $this->value);
+            if (isset($this->name))
+                $this->addAttribute('name', $this->name);
+            if (isset($this->id))
+                $this->addAttribute('id', $this->id . '_' . str_replace(' ', '_', $value));
+            if (isset($this->value))
+                $this->addAttribute('value', $value);
+            if (isset($this->cssClass))
+                $this->addAttribute('class', $this->cssClass);
+            if (isset($this->value))
+                $this->addChecked($value, $this->value);
             $this->selfCloseTag($label);
             $this->tagGroup .= $this->tag;
         }
@@ -121,9 +138,12 @@ class ToppaHtmlFormField {
 
     private function buildSelectField() {
         $this->startTag('select');
-        $this->addAttribute('name', $this->name);
-        $this->addAttribute('id', $this->id);
-        $this->addAttribute('class', $this->cssClass);
+        if (isset($this->name))
+            $this->addAttribute('name', $this->name);
+        if (isset($this->id))
+            $this->addAttribute('id', $this->id);
+        if (isset($this->cssClass))
+            $this->addAttribute('class', $this->cssClass);
         $this->closeTag();
         $this->tagGroup .= $this->tag;
 
@@ -143,33 +163,42 @@ class ToppaHtmlFormField {
 
     private function buildTextarea() {
         $this->startTag('textarea');
-        $this->addAttribute('name', $this->name);
-        $this->addAttribute('id', $this->id);
-        $this->addAttribute('class', $this->cssClass);
-        $this->addAttribute('cols', $this->refData['input']['cols']);
-        $this->addAttribute('rows', $this->refData['input']['rows']);
-
-        $field = '<textarea name="' . $this->name . '" id="' . $this->id
-            . '" cols="' . $this->refData['input']['cols']
-            . '" rows="' . $this->refData['input']['rows'] . '">';
-
-        if ($this->class) {
-            $field .= ' class="' . $this->class . '"';
+        if (isset($this->name))
+            $this->addAttribute('name', $this->name);
+        if (isset($this->id))
+            $this->addAttribute('id', $this->id);
+        if (isset($this->cssClass))
+            $this->addAttribute('class', $this->cssClass);
+        if (isset($this->refData['input']['cols']))
+            $this->addAttribute('cols', $this->refData['input']['cols']);
+        if (isset($this->refData['input']['rows']))
+            $this->addAttribute('rows', $this->refData['input']['rows']);
+        if (isset($this->value)) {
+            $this->closeTag(htmlspecialchars($this->value));
         }
 
-        $field .= htmlspecialchars($this->value) . '</textarea>' . PHP_EOL;
-        return $field;
+        else {
+            $this->closeTag();;
+        }
+
+        $this->addClosingTag('textarea');
+        return $this->tag;
     }
 
     private function buildCheckboxGroup() {
         foreach ($this->refData['input']['subgroup'] as $value=>$label) {
             $this->startTag('input');
             $this->addAttribute('type', 'checkbox');
-            $this->addNameAsArrayField('name', $this->name);
-            $this->addAttribute('value', $value);
-            $this->addAttribute('id', $this->id . '_' . str_replace(' ', '_', $value));
-            $this->addAttribute('class', $this->cssClass);
-            $this->addCheckedForArrayValue($value, $this->value);
+            if (isset($this->name))
+                $this->addNameAsArrayField('name', $this->name);
+            if (isset($this->id))
+                $this->addAttribute('id', $this->id . '_' . str_replace(' ', '_', $value));
+            if (isset($this->value))
+                $this->addAttribute('value', $value);
+            if (isset($this->cssClass))
+                $this->addAttribute('class', $this->cssClass);
+            if (isset($this->value))
+                $this->addCheckedForArrayValue($value, $this->value);
             $this->selfCloseTag($label);
             $this->tagGroup .= $this->tag;
         }
@@ -206,9 +235,9 @@ class ToppaHtmlFormField {
     }
 
     private function addAttribute($type, $value = null) {
-        if (!strlen($value)) {
+       if (is_null($value)) {
             return null;
-        }
+       }
 
         $this->tag .= " $type=\"" . htmlspecialchars($value) . '"';
     }
