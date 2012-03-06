@@ -37,7 +37,9 @@ Upload to your plugin folder just like any other plugin, and activate.
 = 1.3 =
 * Added followRedirect() to ToppaFunctions
 * Added arrayMergeRecursiveForSettings() to ToppaFunctions
+* Added htmlSpecialCharsOnce() to ToppaFunctionsFacade
 * Cleanup of PHP warnings in ToppaHtmlFormFields when running WP in debug mode
+* Cleanup createTable() in ToppaDatabaseFacade
 
 = 1.2 =
 * Added callFunctionForNetworkSites() to ToppaFunctionsFacade
