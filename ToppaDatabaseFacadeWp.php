@@ -17,6 +17,7 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         $sql = "CREATE TABLE $tableName (\n";
+        $sql_append = '';
 
         foreach ($refData as $k=>$v) {
             $sql .= $k . " " . $v['db']['type'];
@@ -41,10 +42,10 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
 
             $sql .= ",\n";
 
-            $sql_append = '';
-
             // dbDelta requires primary and unique indexes declared at the end, using KEY
-            if (isset($v['db']['primary_key'])) {
+            // don't try to set a primary key if the table already exists, db-delta will
+            // print an error (it will try to add the key again)
+            if (isset($v['db']['primary_key']) && !$this->verifyTableExists($tableName, $refData)) {
                 $sql_append .= "PRIMARY KEY $k ($k),\n";
             }
 
@@ -69,9 +70,11 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
     public function verifyTableExists($tableName, array $refData) {
         global $wpdb;
         $tableName = $this->checkIsStringAndEscape($tableName);
+        $wpdb->suppress_errors();
         $described = $wpdb->get_results("DESCRIBE $tableName;", ARRAY_A);
+        $wpdb->suppress_errors(false);
 
-        if ($described[0]['Field'] == key($refData)) {
+        if (isset($described[0]['Field']) && $described[0]['Field'] == key($refData)) {
             return true;
         }
 
