@@ -105,6 +105,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return new WP_Http();
     }
 
+    public function createAdminHiddenInputFields($label) {
+        return settings_fields($label);
+    }
+
     // echoes input fields if $echoFormField == true; returns them otherwise
     public function createNonceFields($myActionName = null, $nonceFieldName = null, $validateReferrer = true, $echoFormField = true) {
         return wp_nonce_field($myActionName, $nonceFieldName, $validateReferrer, $echoFormField);

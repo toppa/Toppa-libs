@@ -17,6 +17,7 @@ interface ToppaFunctionsFacade {
     public function isPage($anyPageIdentifier);
     public function getPermalink();
     public function getHttpRequestObject();
+    public function createAdminHiddenInputFields($label);
     public function createNonceFields($myActionName = null, $nonceFieldName = null, $validateReferrer = true, $echoFormField = true);
     public function addNonceToUrl($url, $nonceName);
     public function checkAdminNonceFields($myActionName = null, $nonceFieldName = '_wpnonce');
