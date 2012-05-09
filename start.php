@@ -4,7 +4,7 @@ Plugin Name: Toppa Plugins Libraries for WordPress
 Plugin URI: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Description: Libraries to facilitate the use of Agile coding techniques for developing WordPress plugins. Contains required libraries for using plugins from toppa.com
 Author: Michael Toppa
-Version: 1.3.1
+Version: 1.3.3
 Author URI: http://www.toppa.com
 */
 
@@ -18,7 +18,16 @@ if (!defined('WPMU_PLUGIN_URL')) define('WPMU_PLUGIN_URL', WP_CONTENT_URL. '/mu-
 if (!defined('WPMU_PLUGIN_DIR')) define('WPMU_PLUGIN_DIR', WP_CONTENT_DIR . '/mu-plugins');
 
 load_plugin_textdomain('toppalibs', false, basename(dirname(__FILE__)) . '/languages/');
+add_action('admin_init', 'toppaLibsSetVersion');
 register_activation_hook(__FILE__, 'toppaLibsActivate');
+
+function toppaLibsSetVersion() {
+    $currentVersion = get_option('toppaLibsVersion');
+
+    if ($currentVersion != '1.3.3') {
+        update_option('toppaLibsVersion', '1.3.3');
+    }
+}
 
 function toppaLibsActivate() {
     if (!function_exists('spl_autoload_register')) {
