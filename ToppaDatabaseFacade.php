@@ -1,7 +1,7 @@
 <?php
 
 interface ToppaDatabaseFacade {
-    public function __construct(ToppaAutoLoader &$autoLoader);
+    public function __construct();
     public function getTableNamePrefix();
     public function createTable($tableName, array $refData);
     public function verifyTableExists($tableName, array $refData);

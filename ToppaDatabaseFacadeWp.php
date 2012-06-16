@@ -1,10 +1,7 @@
 <?php
 
 class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
-    private $autoLoader;
-
-    public function __construct(ToppaAutoLoader &$autoLoader) {
-        $this->autoLoader = $autoLoader;
+    public function __construct() {
     }
 
     public function getTableNamePrefix() {
