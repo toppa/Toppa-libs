@@ -25,6 +25,17 @@ class ToppaFunctions {
         $string = htmlentities($string);
     }
 
+    public function sanitizeStringCallback(&$string, $key = null) {
+        // this is WordPress only
+        if (function_exists('sanitize_text_field')) {
+            $string = sanitize_text_field($string);
+        }
+
+        else {
+            $string = strip_tags(trim(iconv('UTF-8','UTF-8//IGNORE', $string)));
+        }
+    }
+
     public static function makeTimestampPhpSafe($timestamp = null) {
         // if timestamp comes in as a float, it'll be translated to, e.g. 1.30152466512E+13
         // and casting it to an int will not give us the original number
