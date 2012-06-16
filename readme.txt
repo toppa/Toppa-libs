@@ -3,7 +3,7 @@ Contributors: toppa
 Donate link: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Tags: agile, database, unit test, testing, autoload, autoloader, facade
 Requires at least: 3.0
-Tested up to: 3.3.2
+Tested up to: 3.4
 Stable tag: 1.3.4
 License: GPLv2 or later
 
