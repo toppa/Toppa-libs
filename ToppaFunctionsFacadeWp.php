@@ -78,7 +78,11 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return dirname(plugin_basename($path));
     }
 
-    public function enqueueStylesheet($handle, $relativePath, $dependencies = false, $version = null, $media = null) {
+    public function registerStylesheet($handle, $relativePath = false, $dependencies = false, $version = null, $media = null) {
+        return wp_register_style($handle, $relativePath, $dependencies, $version, $media);
+    }
+
+    public function enqueueStylesheet($handle, $relativePath = false, $dependencies = false, $version = null, $media = null) {
         return wp_enqueue_style($handle, $relativePath, $dependencies, $version, $media);
     }
 
@@ -95,6 +99,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
         return is_page($anyPageIdentifier);
     }
 
+    public function getPost($postId, $outputType = OBJECT) {
+		return get_post($postId, $outputType);
+	}
+
     public function getPermalink() {
         return get_permalink();
     }
@@ -103,6 +111,11 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
     public function getHttpRequestObject() {
         require_once(ABSPATH . WPINC . '/class-http.php');
         return new WP_Http();
+    }
+
+    public function getScriptsObject() {
+        global $wp_scripts;
+        return $wp_scripts;
     }
 
     public function createAdminHiddenInputFields($label) {

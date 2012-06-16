@@ -11,12 +11,15 @@ interface ToppaFunctionsFacade {
     public function getPluginsPath();
     public function getBasePath();
     public function getPluginDirectoryName($path);
-    public function enqueueStylesheet($handle, $relativePath, $dependencies = false, $version = null, $media = null);
+    public function registerStylesheet($handle, $relativePath = false, $dependencies = false, $version = null, $media = null);
+    public function enqueueStylesheet($handle, $relativePath = false, $dependencies = false, $version = null, $media = null);
     public function enqueueScript($handle, $relativePath, $dependencies = false, $version = null, $media = null);
     public function localizeScript($handle, $objectName, $data);
     public function isPage($anyPageIdentifier);
+    public function getPost($postId, $outputType);
     public function getPermalink();
     public function getHttpRequestObject();
+    public function getScriptsObject();
     public function createAdminHiddenInputFields($label);
     public function createNonceFields($myActionName = null, $nonceFieldName = null, $validateReferrer = true, $echoFormField = true);
     public function addNonceToUrl($url, $nonceName);
