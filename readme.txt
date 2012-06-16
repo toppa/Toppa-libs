@@ -4,7 +4,7 @@ Donate link: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Tags: agile, database, unit test, testing, autoload, autoloader, facade
 Requires at least: 3.0
 Tested up to: 3.3.2
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 
 Facilitates the use of Agile coding techniques in developing WordPress plugins. Contains required libraries for using plugins from toppa.com
@@ -34,6 +34,13 @@ Upload to your plugin folder just like any other plugin, and activate.
 * For troubleshooting help, please [post a comment in my latest post on WordPress plugins](http://www.toppa.com/category/technical/wordpress-plugins/).
 
 == Changelog ==
+
+= 1.3.4 =
+* Added registerStylesheet(), getPost(), and getScriptsObject() to ToppaFunctionsFacade
+* Added default value for 2nd argument for enqueueStylesheet() in ToppaFunctionsFacade
+* Added sanitizeStringCallback() to ToppaFunctions
+* Removed unneeded autoLoader param in constructor for ToppaDatabaseFacade
+* Added support for hidden fields to ToppaHtmlFormField
 
 = 1.3.3 = Save version number to the options table
 
