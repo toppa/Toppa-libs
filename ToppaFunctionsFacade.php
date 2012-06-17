@@ -16,7 +16,7 @@ interface ToppaFunctionsFacade {
     public function enqueueScript($handle, $relativePath, $dependencies = false, $version = null, $media = null);
     public function localizeScript($handle, $objectName, $data);
     public function isPage($anyPageIdentifier);
-    public function getPost($postId, $outputType);
+    public function getPost($postId, $outputType = OBJECT);
     public function getPermalink();
     public function getHttpRequestObject();
     public function getScriptsObject();
