@@ -3,8 +3,8 @@ Contributors: toppa
 Donate link: http://www.toppa.com/toppa-plugin-libraries-for-wordpress/
 Tags: agile, database, unit test, testing, autoload, autoloader, facade
 Requires at least: 3.0
-Tested up to: 3.4
-Stable tag: 1.3.5
+Tested up to: 3.4.1
+Stable tag: 1.3.6
 License: GPLv2 or later
 
 Facilitates the use of Agile coding techniques in developing WordPress plugins. Contains required libraries for using plugins from toppa.com
@@ -13,9 +13,10 @@ Facilitates the use of Agile coding techniques in developing WordPress plugins. 
 
 **Overview**
 
-The Toppa Plugin Libraries for WordPress include several utilities for plugin developers. They facilitate the use of Agile coding techniques for developing WordPress plugins. This library is required for use of upcoming plugins from toppa.com. Each is written to conform to an object interface. This means that if you code your plugin against the interfaces, you can write unit tests for your plugin, and potentially use it outside of WordPress (you would need to write non-WordPress specific versions of the Toppa Library classes that conform to the interfaces, but you would not need to alter your plugin itself). The following libraries are included.
+The Toppa Plugin Libraries for WordPress include several utilities for plugin developers. They facilitate the use of Agile coding techniques for developing WordPress plugins. This library is required for use of [toppa.com plugins](http://www.toppa.com/wordpress-plugins). The following libraries are included:
 
 * ToppaAutoloader: gives you an easy way to autoload class files for WordPress plugins. It conforms to the [PSR-0 standard for autoloading in PHP](http://groups.google.com/group/php-standards/web/psr-0-final-proposal), except it does not yet support namespaces (since WordPress currently is not intended for use with features that were introduced in PHP 5.3).
+* ToppaSettings: simplifies the management of plugin settings.
 * ToppaFunctionsFacade: creates a facade (wrapper) for functions that are custom to WordPress, and provides enhanced functionality for certain tasks (such as multisite plugin installations). This allows you to write your plugins without calling WordPress functions directly. This gives you the power to do two things: 1. write unit tests for your plugin, and 2. make your plugin potentially usable outside of WordPress.
 * ToppaDatabaseFacade: similar in concept to ToppaFunctionsFacade, but focuses on database interactions. In addition to creating wrappers for WordPress database calls, it includes enhanced functionality for tasks such as creating custom tables.
 * ToppaHtmlFormField: a lightweight utility for creating HTML form fields. It is not a complete form builder. Instead it is intended to make it very easy to create form fields in a standardized way, and then lets you use them however you like.
@@ -34,6 +35,11 @@ Upload to your plugin folder just like any other plugin, and activate.
 * For troubleshooting help, please [post a comment in my latest post on WordPress plugins](http://www.toppa.com/category/technical/wordpress-plugins/).
 
 == Changelog ==
+
+= 1.3.6 =
+
+* In the autoloader, check that a class file exists before loading, instead of just suppressing any include errors (this fixes a warnings issue with PHP on Windows)
+* In the settings manager, add handling for nested arrays in settings
 
 = 1.3.5 = Bug fix: assign defualt value to $outputType param in getPost() in ToppaFunctionsFacade (was causing an error in PHP 5.2.1)
 
