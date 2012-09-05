@@ -32,10 +32,10 @@ class ToppaAutoLoaderWp implements ToppaAutoLoader {
 
     public function includeClass() {
         if (class_exists($this->className, false)) {
-            return 1;
+            return true;
         }
 
-        else {
+        elseif (file_exists($this->fullPath)) {
             return @include($this->fullPath);
         }
 
