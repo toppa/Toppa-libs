@@ -17,7 +17,9 @@ interface ToppaFunctionsFacade {
     public function localizeScript($handle, $objectName, $data);
     public function isPage($anyPageIdentifier);
     public function getPost($postId, $outputType = OBJECT);
-    public function getPermalink();
+    public function getTermBy($field, $value, $taxonomy, $output = OBJECT, $filter = 'raw');
+    public function getTermLink($term);
+    public function getPermalink($idOrPostObject = null);
     public function getHttpRequestObject();
     public function getScriptsObject();
     public function createAdminHiddenInputFields($label);
@@ -30,6 +32,7 @@ interface ToppaFunctionsFacade {
     public function checkEmailHasValidFormat($email);
     public function sendEmail($to, $subject = null, $message = null, $headers = null, array $attachments = null);
     public function htmlSpecialCharsOnce($string);
+    public function escHtml($string);
     public function sanitizeString($string);
     public function dateI18n($dateFormat, $timestamp = false, $convertToGmt = false);
     public function getSetting($setting);

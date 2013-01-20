@@ -103,7 +103,19 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
 		return get_post($postId, $outputType);
 	}
 
-    public function getPermalink() {
+    public function getTermBy($field, $value, $taxonomy, $output = OBJECT, $filter = 'raw') {
+        return get_term_by($field, $value, $taxonomy, $output, $filter);
+    }
+
+    public function getTermLink($term) {
+        return get_term_link($term);
+    }
+
+    public function getPermalink($idOrPostObject = null) {
+        if ($idOrPostObject) {
+            return get_permalink($idOrPostObject);
+        }
+
         return get_permalink();
     }
 
@@ -189,6 +201,10 @@ class ToppaFunctionsFacadeWp implements ToppaFunctionsFacade {
     */
     public function htmlSpecialCharsOnce($string) {
         return esc_attr($string);
+    }
+
+    public function escHtml($string) {
+        return esc_html($string);
     }
 
     public function dateI18n($dateFormat, $timestamp = false, $convertToGmt = false) {
