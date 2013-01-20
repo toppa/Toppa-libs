@@ -20,4 +20,5 @@ interface ToppaDatabaseFacade {
     public function sqlEscapeCallback(&$string, $key);
     public function checkIsStringAndEscape($string);
     public function getIntTypes();
+    public function executeDbFunction($name);
 }

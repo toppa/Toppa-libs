@@ -271,4 +271,9 @@ class ToppaDatabaseFacadeWp implements ToppaDatabaseFacade {
             'tinyint unsigned', 'smallint unsigned', 'mediumint unsigned', 'int unsigned', 'bigint unsigned'
         );
     }
+
+    public function executeDbFunction($name) {
+        global $wpdb;
+        return $wpdb->$name;
+    }
 }
