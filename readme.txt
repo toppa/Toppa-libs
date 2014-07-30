@@ -11,6 +11,8 @@ Facilitates the use of Agile coding techniques in developing WordPress plugins. 
 
 == Description ==
 
+**I am currently no longer developing or supporting this plugin. I may resume development and support in the future, but I'm not sure when.**
+
 **Overview**
 
 The Toppa Plugin Libraries for WordPress include several utilities for plugin developers. They facilitate the use of Agile coding techniques for developing WordPress plugins. This library is required for use of [toppa.com plugins](http://www.toppa.com/wordpress-plugins). The following libraries are included:
